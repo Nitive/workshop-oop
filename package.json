@@ -1,0 +1,23 @@
+{
+  "name": "workshop-oop",
+  "version": "0.1.0",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^23.3.0",
+    "jest": "^23.4.1",
+    "ts-jest": "^23.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^7.1.0",
+    "typescript": "^2.9.2"
+  },
+  "jest": {
+    "transform": {
+      ".ts": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": ".*test\\.(ts|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ]
+  }
+}
