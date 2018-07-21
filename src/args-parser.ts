@@ -1,40 +1,39 @@
-import { last, startsWith, dropLast, fromPairs } from 'ramda'
+import * as program from 'commander'
+import { last, mapObjIndexed, toPairs } from 'ramda'
 
-interface ParseResult<Options> {
+
+type SchemaOptionsShape = {
+  [key: string]: {
+    shortcut?: string,
+    type: 'boolean' | 'string',
+    help?: string,
+  },
+}
+
+interface Schema<Options> {
   target: string,
-  options: Options
+  options: Options,
 }
 
-function splitOptionsArgs(optionsArgs: string[]): string[][] {
-  return optionsArgs.reduce((argsGroups, arg) => {
-    if (startsWith('--', arg)) {
-      return [...argsGroups, [arg]]
-    } else {
-      const lastArgsGroup = last(argsGroups) || []
-      return [...dropLast(1, argsGroups), [...lastArgsGroup, arg]]
-    }
-  }, [])
-}
+// todo: program is probably singleton
+// todo: return error message instead of throwing exception
+export class ArgsParser<OptionsType> {
+  constructor(private optionsSchema: SchemaOptionsShape) {}
 
-function parseOptions(optionsArgs: string[]) {
-  const optsPairs = splitOptionsArgs(optionsArgs)
-      .map(([key, ...args]): [string, string] => [key.replace('--', ''), args.join(' ')])
+  parse(args: string[]): Schema<OptionsType> {
+    const prog = toPairs(this.optionsSchema)
+      .reduce((p, [name, { shortcut, help, type } ]) => {
+        const shortcutCommand = shortcut ? `-${shortcut}, ` : ''
+        const valuePlaceholder = type === 'string' ? ' [value]' : ''
+        return p.option(`${shortcutCommand}--${name}${valuePlaceholder}`, help)
+      }, program)
+        .parse(args)
 
-  return fromPairs(optsPairs)
-}
-
-export class ArgsParser<Options> {
-  parse(argv: string[]): ParseResult<Options> {
-    const args = argv.slice(2)
-    const lastArg = last(args)
-    const target = (!lastArg || startsWith('--', lastArg)) ? undefined : lastArg
-    const optionsArgs = target ? args.slice(0, -1) : args
-
-    const options = parseOptions(optionsArgs)
+    const target = last(args)!
 
     return {
-      target: target!,
-      options: options as any,
+      target,
+      options: mapObjIndexed((_value, key) => prog[key], this.optionsSchema) as any,
     }
   }
 }

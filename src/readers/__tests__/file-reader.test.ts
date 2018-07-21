@@ -1,8 +1,8 @@
 import { FileSystem, FileReader } from '../file-reader'
 
 const fakeFileSystem: FileSystem = {
-  readFile(_file, _encoding, callback) {
-    callback(null, 'data')
+  readFile() {
+    return Promise.resolve('data')
   },
 }
 

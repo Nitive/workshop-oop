@@ -1,25 +1,27 @@
-import * as fs from 'fs'
-import { startsWith } from 'ramda'
+import axios from 'axios'
+import { promises as fs } from 'fs'
 import { ArgsParser } from './args-parser'
 import { FileReader } from './readers/file-reader'
 import { NetworkReader } from './readers/network-reader'
 import { ResourceReader } from './readers/resource-reader'
-import axios from 'axios'
+import { isURL } from './utils'
 
 interface AppOptions {
-  help: string,
   out: 'rss' | 'atom',
 }
 
-function isURL(resourseLocation: string): boolean {
-  return startsWith('http', resourseLocation)
+const argsSchema = {
+  out: {
+    shortcut: 'o',
+    type: 'string' as 'string',
+    help: 'Out file format: rss or atom',
+  },
 }
 
 function run() {
-  const argsParser = new ArgsParser<AppOptions>()
+  const argsParser = new ArgsParser<AppOptions>(argsSchema)
 
   const appOptions = argsParser.parse(process.argv)
-  console.log(appOptions)
 
   const targetReader: ResourceReader = isURL(appOptions.target)
     ? new NetworkReader(axios)
