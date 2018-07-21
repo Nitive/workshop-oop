@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { promises as fs } from 'fs'
 import { ArgsParser } from './args-parser'
+import { Converter } from './converter'
 import { FileReader } from './readers/file-reader'
 import { NetworkReader } from './readers/network-reader'
 import { ResourceReader } from './readers/resource-reader'
 import { isURL } from './utils'
-import { Converter } from './converter'
 
 interface AppOptions {
   out: 'rss' | 'atom',
@@ -17,6 +17,18 @@ const argsSchema = {
     type: 'string' as 'string',
     help: 'Out file format: rss or atom',
   },
+}
+
+function writeToStdout(text: string): Promise<void> {
+  return new Promise((resolve, reject) => {
+    process.stdout.write(text, (err: Error) => {
+      if (err) {
+        reject(err)
+        return
+      }
+      resolve()
+    })
+  })
 }
 
 async function run() {
@@ -33,8 +45,9 @@ async function run() {
   const convert = { atom: converter.convertToAtom, rss: converter.convertToRSS }[appOptions.options.out]
   const result = convert()
 
-  process.stdout.write(result)
+  await writeToStdout(result)
 }
 
 
 run()
+  .catch(console.error)
