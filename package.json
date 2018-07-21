@@ -2,6 +2,7 @@
   "name": "workshop-oop",
   "version": "0.1.0",
   "license": "MIT",
+  "bin": "./bin/convert-feed",
   "devDependencies": {
     "@types/jest": "^23.3.0",
     "@types/node": "^10.5.2",
