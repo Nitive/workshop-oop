@@ -1,4 +1,5 @@
 import * as xml2json from 'xml2json'
+import { sortBy } from 'ramda'
 
 function removeXmlDeclaration(fileContent: string) {
   return fileContent.replace(/<\?xml.*>/, '')
@@ -86,6 +87,37 @@ export class Converter {
   }
 
   constructor(private feed: Feed) {}
+
+  reverseItems = () => {
+    const feed = {
+      ...this.feed,
+      items: this.feed.items.slice().reverse(),
+    }
+
+    return new Converter(feed)
+  }
+
+  sortByDate = () => {
+    const feed = {
+      ...this.feed,
+      items: sortBy(item => new Date(item.date).getTime(), this.feed.items),
+    }
+
+    return new Converter(feed)
+  }
+
+  limitItems = (limit: number) => {
+    const feed = {
+      ...this.feed,
+      items: this.feed.items.slice(0, limit),
+    }
+
+    return new Converter(feed)
+  }
+
+  getFeed = () => {
+    return this.feed
+  }
 
   convertToRSS = () => {
     const { feed } = this
