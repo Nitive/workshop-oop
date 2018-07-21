@@ -8,6 +8,3 @@ unit:
 	npx jest
 
 test: types lint unit
-
-start:
-	node -r ts-node/register/transpile-only src/index.ts

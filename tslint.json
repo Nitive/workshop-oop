@@ -2,6 +2,19 @@
   "extends": "tslint-config-standard",
   "rules": {
     "no-consecutive-blank-lines": [true, 2],
+    "space-before-function-paren": [true, "never"],
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-operator",
+      "check-module",
+      "check-separator",
+      "check-rest-spread",
+      "check-type",
+      "check-type-operator",
+      "check-preblock"
+    ],
     "trailing-comma": [true, {"multiline": "always", "singleline": "never"}]
   }
 }

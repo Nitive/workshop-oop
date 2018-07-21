@@ -2,12 +2,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "lib": [
-      "es5",
-      "es2015.promise",
-      "es2015.collection",
-      "es2015.iterable",
-      "es2015.symbol",
-      "es2016.array.include"
+      "es2015",
+      "es2015.core"
     ],
     "module": "commonjs",
     "noFallthroughCasesInSwitch": true,
@@ -18,7 +14,8 @@
     "noUnusedLocals": true,
     "sourceMap": true,
     "strictNullChecks": true,
-    "target": "es5"
+    "forceConsistentCasingInFileNames": true,
+    "target": "es6"
   },
   "typeRoots": [
     "node_modules/@types/"
