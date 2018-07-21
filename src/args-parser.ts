@@ -5,7 +5,7 @@ import { last, mapObjIndexed, toPairs } from 'ramda'
 type SchemaOptionsShape = {
   [key: string]: {
     shortcut?: string,
-    type: 'boolean' | 'string',
+    type: 'boolean' | 'string' | 'number',
     help?: string,
   },
 }
@@ -24,8 +24,17 @@ export class ArgsParser<OptionsType> {
     const prog = toPairs(this.optionsSchema)
       .reduce((p, [name, { shortcut, help, type } ]) => {
         const shortcutCommand = shortcut ? `-${shortcut}, ` : ''
-        const valuePlaceholder = type === 'string' ? ' [value]' : ''
-        return p.option(`${shortcutCommand}--${name}${valuePlaceholder}`, help)
+        const valueOptions = {
+          string: { placeholder: ' <n>', parser: undefined },
+          number: { placeholder: ' <n>', parser: parseInt },
+          boolean: { placeholder: '', parser: undefined, defaultValue: false },
+        }[type]
+        return p.option(
+          `${shortcutCommand}--${name}${valueOptions.placeholder}`,
+          help,
+          valueOptions.parser,
+          valueOptions.defaultValue,
+        )
       }, program)
         .parse(args)
 

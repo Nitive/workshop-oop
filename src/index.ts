@@ -9,6 +9,9 @@ import { isURL } from './utils'
 
 interface AppOptions {
   out: 'rss' | 'atom',
+  reverse?: boolean,
+  sort?: 'date',
+  limit?: number,
 }
 
 const argsSchema = {
@@ -16,6 +19,21 @@ const argsSchema = {
     shortcut: 'o',
     type: 'string' as 'string',
     help: 'Out file format: rss or atom',
+  },
+  reverse: {
+    shortcut: 'r',
+    type: 'boolean' as 'boolean',
+    help: 'Reverse items',
+  },
+  sort: {
+    shortcut: 's',
+    type: 'string' as 'string',
+    help: 'Sort. Currently only sort by date is supported',
+  },
+  limit: {
+    shortcut: 'l',
+    type: 'number' as 'number',
+    help: 'Limit items',
   },
 }
 
@@ -31,6 +49,25 @@ function writeToStdout(text: string): Promise<void> {
   })
 }
 
+function applyOptionsToConverter(converter: Converter, options: AppOptions): Converter {
+  if (options.sort && options.sort === 'date') {
+    const { sort, ...restOptions } = options
+    return applyOptionsToConverter(converter.sortByDate(), restOptions)
+  }
+
+  if (options.reverse) {
+    const { reverse, ...restOptions } = options
+    return applyOptionsToConverter(converter.reverseItems(), restOptions)
+  }
+
+  if (options.limit) {
+    const { limit, ...restOptions } = options
+    return applyOptionsToConverter(converter.limitItems(limit), restOptions)
+  }
+
+  return converter
+}
+
 async function run() {
   const argsParser = new ArgsParser<AppOptions>(argsSchema)
 
@@ -42,7 +79,8 @@ async function run() {
 
   const fileContent = await targetReader.read(appOptions.target)
   const converter = Converter.createFromRSS(fileContent)
-  const convert = { atom: converter.convertToAtom, rss: converter.convertToRSS }[appOptions.options.out]
+  const { convertToAtom, convertToRSS } = applyOptionsToConverter(converter, appOptions.options)
+  const convert = { atom: convertToAtom, rss: convertToRSS }[appOptions.options.out]
   const result = convert()
 
   await writeToStdout(result)
