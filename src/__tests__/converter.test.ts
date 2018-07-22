@@ -1,5 +1,5 @@
 import 'jest-xml-matcher'
-import { Converter } from '../converter'
+import { Converter, RssFeedParser, AtomFeedParser, RssFeedRenderer, AtomFeedRenderer } from '../converter'
 
 const rssSource = `
   <?xml version="1.0" encoding="utf-8"?>
@@ -52,36 +52,40 @@ const atomSource = `
 const getFeedTitles = (converter: Converter) => converter.getFeed().items.map(item => item.title)
 const firstItemTitle = 'Rails для начинающих / Фреймворки'
 const secondItemTitle = 'Ареалы проживания членистоногих. Конкурс по функциональному программированию 03.2015. / Главные испытания'
+const rssParser = new RssFeedParser()
+const atomParser = new AtomFeedParser()
+const rssRenderer = new RssFeedRenderer()
+const atomRenderer = new AtomFeedRenderer()
 
 describe('Converter', () => {
   it('should convert RSS to RSS', () => {
-    const converter = Converter.createFromRSS(rssSource)
-    expect(converter.convertToRSS()).toEqualXML(rssSource)
+    const converter = Converter.parse(rssParser, rssSource)
+    expect(converter.render(rssRenderer)).toEqualXML(rssSource)
   })
 
   it('should convert RSS to Atom', () => {
-    const converter = Converter.createFromRSS(rssSource)
-    expect(converter.convertToAtom()).toEqualXML(atomSource)
+    const converter = Converter.parse(rssParser, rssSource)
+    expect(converter.render(atomRenderer)).toEqualXML(atomSource)
   })
 
   it('should convert Atom to Atom', () => {
-    const converter = Converter.createFromAtom(atomSource)
-    expect(converter.convertToAtom()).toEqualXML(atomSource)
+    const converter = Converter.parse(atomParser, atomSource)
+    expect(converter.render(atomRenderer)).toEqualXML(atomSource)
   })
 
   it('should convert Atom to RSS', () => {
-    const converter = Converter.createFromAtom(atomSource)
-    expect(converter.convertToRSS()).toEqualXML(rssSource)
+    const converter = Converter.parse(atomParser, atomSource)
+    expect(converter.render(rssRenderer)).toEqualXML(rssSource)
   })
 
   it('should reverse items', () => {
-    const converter = Converter.createFromAtom(atomSource)
+    const converter = Converter.parse(atomParser, atomSource)
     expect(getFeedTitles(converter)).toEqual([firstItemTitle, secondItemTitle])
     expect(getFeedTitles(converter.reverseItems())).toEqual([secondItemTitle, firstItemTitle])
   })
 
   it('reverse should be immutable', () => {
-    const converter = Converter.createFromAtom(atomSource)
+    const converter = Converter.parse(atomParser, atomSource)
     const converterWithReversedItems = converter.reverseItems()
 
     expect(getFeedTitles(converter)).toEqual([firstItemTitle, secondItemTitle])
@@ -89,12 +93,12 @@ describe('Converter', () => {
   })
 
   it('reverse(reverse(x)) should revert result', () => {
-    const converter = Converter.createFromAtom(atomSource)
+    const converter = Converter.parse(atomParser, atomSource)
     expect(getFeedTitles(converter)).toEqual(getFeedTitles(converter.reverseItems().reverseItems()))
   })
 
   it('should sort by date', () => {
-    const converter = Converter.createFromAtom(atomSource)
+    const converter = Converter.parse(atomParser, atomSource)
     const Mar25 = firstItemTitle
     const Mar5 = secondItemTitle
 
@@ -102,12 +106,12 @@ describe('Converter', () => {
   })
 
   it('sort(x) and reverse(sort(x)) should be equal', () => {
-    const converter = Converter.createFromAtom(atomSource)
+    const converter = Converter.parse(atomParser, atomSource)
     expect(converter.sortByDate().getFeed()).toEqual(converter.reverseItems().sortByDate().getFeed())
   })
 
   it('should limit items', () => {
-    const converter = Converter.createFromAtom(atomSource)
+    const converter = Converter.parse(atomParser, atomSource)
     expect(converter.limitItems(1).getFeed().items).toHaveLength(1)
     expect(converter.limitItems(2).getFeed().items).toHaveLength(2)
   })

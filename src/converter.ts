@@ -34,17 +34,17 @@ function parseXml(fileContent: string): any {
   )
 }
 
-function $t<C>(content: C): { $t: C } {
-  return { $t: content }
+export interface FeedParser {
+  parse(fileContent: string): Feed,
 }
 
-export class Converter {
-  static createFromAtom(fileContent: string) {
+export class AtomFeedParser implements FeedParser {
+  parse(fileContent: string) {
     const json = parseXml(fileContent)
     const { feed: f } = json// ?
     const items: any[] = [].concat(f.entry)
 
-    const feed: Feed = {
+    return {
       title: f.title,
       description: f.subtitle,
       link: f.link.href,
@@ -59,16 +59,16 @@ export class Converter {
         date: item.updated,
       })),
     }
-
-    return new Converter(feed)
   }
+}
 
-  static createFromRSS(fileContent: string) {
+export class RssFeedParser implements FeedParser {
+  parse(fileContent: string) {
     const json = parseXml(fileContent)
     const { rss } = json
     const items: any[] = [].concat(rss.channel.item)
 
-    const feed: Feed = {
+    return {
       title: rss.channel.title,
       description: rss.channel.description,
       link: rss.channel.link,
@@ -82,11 +82,77 @@ export class Converter {
         date: item.pubDate,
       })),
     }
-
-    return new Converter(feed)
   }
+}
 
+export interface FeedRenderer {
+  renderer(feed: Feed): string,
+}
+
+function $t<C>(content: C): { $t: C } {
+  return { $t: content }
+}
+
+export class RssFeedRenderer implements FeedRenderer {
+  renderer(feed: Feed): string {
+    const { author } = feed
+
+    return addXmlDeclaration(
+      xml2json.toXml({
+        rss: {
+          version: '2.0',
+          'xmlns:atom': 'http://www.w3.org/2005/Atom',
+          channel: {
+            title: $t(feed.title),
+            description: $t(feed.description),
+            link: $t(feed.link),
+            webMaster: author && author.email && $t(author.email) ,
+            item: feed.items.map(item => ({
+              title: $t(item.title),
+              link: $t(item.link),
+              description: $t(item.description),
+              pubDate: $t(item.date),
+            })),
+          },
+        },
+      }),
+    )
+  }
+}
+
+export class AtomFeedRenderer implements FeedRenderer {
+  renderer(feed: Feed) {
+    const { author } = feed
+
+    return addXmlDeclaration(
+      xml2json.toXml({
+        feed: {
+          xmlns: 'http://www.w3.org/2005/Atom',
+          title: $t(feed.title),
+          subtitle: $t(feed.description),
+          link: { href: feed.link },
+          author: {
+            name: author && author.name && $t(author.name),
+            email: author && author.email && $t(author.email),
+          },
+          entry: feed.items.map(item => ({
+            title: $t(item.title),
+            link: { href: item.link },
+            summary: $t(item.description),
+            updated: $t(item.date),
+          })),
+        },
+      }),
+    )
+  }
+}
+
+export class Converter {
   constructor(private feed: Feed) {}
+
+  static parse(parser: FeedParser, fileContent: string) {
+    return new Converter(parser.parse(fileContent))
+  }
 
   reverseItems = () => {
     const feed = {
@@ -119,55 +185,7 @@ export class Converter {
     return this.feed
   }
 
-  convertToRSS = () => {
-    const { feed } = this
-    const { author } = feed
-
-    return addXmlDeclaration(
-      xml2json.toXml({
-        rss: {
-          version: '2.0',
-          'xmlns:atom': 'http://www.w3.org/2005/Atom',
-          channel: {
-            title: $t(feed.title),
-            description: $t(feed.description),
-            link: $t(feed.link),
-            webMaster: author && author.email && $t(author.email) ,
-            item: feed.items.map(item => ({
-              title: $t(item.title),
-              link: $t(item.link),
-              description: $t(item.description),
-              pubDate: $t(item.date),
-            })),
-          },
-        },
-      }),
-    )
-  }
-
-  convertToAtom = () => {
-    const { feed } = this
-    const { author } = feed
-
-    return addXmlDeclaration(
-      xml2json.toXml({
-        feed: {
-          xmlns: 'http://www.w3.org/2005/Atom',
-          title: $t(feed.title),
-          subtitle: $t(feed.description),
-          link: { href: feed.link },
-          author: {
-            name: author && author.name && $t(author.name),
-            email: author && author.email && $t(author.email),
-          },
-          entry: feed.items.map(item => ({
-            title: $t(item.title),
-            link: { href: item.link },
-            summary: $t(item.description),
-            updated: $t(item.date),
-          })),
-        },
-      }),
-    )
+  render = (converter: FeedRenderer) => {
+    return converter.renderer(this.feed)
   }
 }
