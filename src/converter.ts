@@ -1,5 +1,5 @@
 import * as xml2json from 'xml2json'
-import { sortBy } from 'ramda'
+import { sortBy, identity } from 'ramda'
 
 function removeXmlDeclaration(fileContent: string) {
   return fileContent.replace(/<\?xml.*>/, '')
@@ -9,14 +9,14 @@ function addXmlDeclaration(fileContent: string) {
   return '<?xml version="1.0" encoding="utf-8"?>\n' + fileContent
 }
 
-interface FeedItem {
+export interface FeedItem {
   title: string,
   link: string,
   description: string,
   date: string,
 }
 
-interface Feed {
+export interface Feed {
   title: string,
   description: string,
   link: string,
@@ -86,7 +86,7 @@ export class RssFeedParser implements FeedParser {
 }
 
 export interface FeedRenderer {
-  renderer(feed: Feed): string,
+  render(feed: Feed): string,
 }
 
 function $t<C>(content: C): { $t: C } {
@@ -94,7 +94,7 @@ function $t<C>(content: C): { $t: C } {
 }
 
 export class RssFeedRenderer implements FeedRenderer {
-  renderer(feed: Feed): string {
+  render(feed: Feed): string {
     const { author } = feed
 
     return addXmlDeclaration(
@@ -121,7 +121,7 @@ export class RssFeedRenderer implements FeedRenderer {
 }
 
 export class AtomFeedRenderer implements FeedRenderer {
-  renderer(feed: Feed) {
+  render(feed: Feed) {
     const { author } = feed
 
     return addXmlDeclaration(
@@ -148,44 +148,38 @@ export class AtomFeedRenderer implements FeedRenderer {
 }
 
 export class Converter {
-  constructor(private feed: Feed) {}
+  constructor(private updateFeed: (feed: Feed) => Feed = identity) {}
 
-  static parse(parser: FeedParser, fileContent: string) {
-    return new Converter(parser.parse(fileContent))
+  private updateItems = (update: (items: FeedItem[]) => FeedItem[]): Converter => {
+    return new Converter(
+      (prevFeed: Feed) => {
+        const feed = this.updateFeed(prevFeed)
+        return {
+          ...feed,
+          items: update(feed.items),
+        }
+      },
+    )
   }
 
   reverseItems = () => {
-    const feed = {
-      ...this.feed,
-      items: this.feed.items.slice().reverse(),
-    }
-
-    return new Converter(feed)
+    return this.updateItems(items => items.slice().reverse())
   }
 
   sortByDate = () => {
-    const feed = {
-      ...this.feed,
-      items: sortBy(item => new Date(item.date).getTime(), this.feed.items),
-    }
-
-    return new Converter(feed)
+    return this.updateItems(items => sortBy(item => new Date(item.date).getTime(), items))
   }
 
   limitItems = (limit: number) => {
-    const feed = {
-      ...this.feed,
-      items: this.feed.items.slice(0, limit),
-    }
-
-    return new Converter(feed)
+    return this.updateItems(items => items.slice(0, limit))
   }
 
-  getFeed = () => {
-    return this.feed
+  getFeed = (parser: FeedParser, fileContent: string): Feed => {
+    return this.updateFeed(parser.parse(fileContent))
   }
 
-  render = (converter: FeedRenderer) => {
-    return converter.renderer(this.feed)
+  convert = (parser: FeedParser, render: FeedRenderer, fileContent: string) => {
+    const feed = this.updateFeed(parser.parse(fileContent))
+    return render.render(feed)
   }
 }

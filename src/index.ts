@@ -84,17 +84,12 @@ async function run() {
     throw new Error('Unexpected file extension')
   }
 
-  const FeedParser = {
-    rss: RssFeedParser,
-    atom: AtomFeedParser,
-  }[fileExt]
+  const converter = new Converter()
+  const { convert } = applyOptionsToConverter(converter, appOptions.options)
 
-  const converter = Converter.parse(new FeedParser(), fileContent)
-
-  const { render } = applyOptionsToConverter(converter, appOptions.options)
-  const Renderer = { atom: AtomFeedRenderer, rss: RssFeedRenderer }[appOptions.options.out]
-
-  const result = render(new Renderer())
+  const FeedParser = { rss: RssFeedParser, atom: AtomFeedParser }[fileExt]
+  const FeedRenderer = { atom: AtomFeedRenderer, rss: RssFeedRenderer }[appOptions.options.out]
+  const result = convert(new FeedParser(), new FeedRenderer(), fileContent)
 
   await writeToStdout(result)
 }
