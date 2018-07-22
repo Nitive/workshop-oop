@@ -1,5 +1,5 @@
 import 'jest-xml-matcher'
-import { AtomFeedParser, AtomFeedRenderer, Converter, Feed, RssFeedParser, RssFeedRenderer } from '../converter'
+import { AtomFeedParser, AtomFeedRenderer, Converter, Feed, RssFeedParser, RssFeedRenderer } from '../..'
 
 const rssSource = `
   <?xml version="1.0" encoding="utf-8"?>

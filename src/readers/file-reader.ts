@@ -11,5 +11,6 @@ export class FileReader implements ResourceReader {
     const { fs } = this
 
     return fs.readFile(path, 'utf8')
+      .catch(() => Promise.reject('FILE_NOT_FOUND'))
   }
 }
