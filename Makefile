@@ -1,3 +1,6 @@
+install:
+	npm install
+
 types:
 	npx tsc -p . --noEmit
 

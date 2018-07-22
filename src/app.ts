@@ -66,20 +66,25 @@ type RunResult
   | { status: 'error', error: string }
 
 export class App {
-  constructor(private sources: { fs: FileSystem, network: NetworkLayer, out: Out }) {}
+  constructor(private world: { fs: FileSystem, network: NetworkLayer, out: Out }) {}
   async run(args: string[]): Promise<RunResult> {
     const argsParser = new ArgsParser<AppOptions>(argsSchema)
     const appOptions = argsParser.parse(args)
 
     const targetReader: ResourceReader = isURL(appOptions.target)
-      ? new NetworkReader(this.sources.network)
-      : new FileReader(this.sources.fs)
+      ? new NetworkReader(this.world.network)
+      : new FileReader(this.world.fs)
 
     let fileContent
     try {
       fileContent = await targetReader.read(appOptions.target)
-    } catch (error) {
-      return { status: 'error', error }
+    } catch (errorCode) {
+      const errorMessages: { [key: string]: string } = {
+        FILE_NOT_FOUND: 'File not found',
+        CANNOT_DOWNLOAD: 'Cannot download file',
+      }
+      const errorMessage = errorMessages[errorCode] || 'Unexpected error'
+      return { status: 'error', error: errorMessage }
     }
 
     const fileExt = getFileExtension(appOptions.target)
@@ -96,7 +101,7 @@ export class App {
     const result = convert(new FeedParser(), new FeedRenderer(), fileContent)
 
     try {
-      await this.sources.out.write(result)
+      await this.world.out.write(result)
     } catch {
       return { status: 'error', error: 'Can not write to out channel' }
     }

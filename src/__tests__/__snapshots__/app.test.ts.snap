@@ -1,0 +1,938 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App atom out should works 1`] = `
+Object {
+  "reads": Array [],
+  "requests": Array [
+    Object {
+      "url": "https://ru.hexlet.io/lessons.rss",
+    },
+  ],
+  "result": Object {
+    "status": "ok",
+  },
+  "writes": Array [
+    "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<feed xmlns=\\"http://www.w3.org/2005/Atom\\">
+    <title>
+        Новые уроки на Хекслете
+    </title>
+    <subtitle>
+        Практические уроки по программированию
+    </subtitle>
+    <link href=\\"https://ru.hexlet.io/\\">
+    </link>
+    <author>
+        <email>
+            info@hexlet.io
+        </email>
+    </author>
+    <entry>
+        <title>
+            Ареалы проживания членистоногих. Конкурс по функциональному программированию 03.2015. / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/functional-contest-03-2015/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Получить сатисфакцию
+        </summary>
+        <updated>
+            Thu, 05 Mar 2015 14:56:47 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Rails для начинающих / Фреймворки
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/frameworks/lessons/rails_getting_started/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться работать с фреймворком Rails
+        </summary>
+        <updated>
+            Wed, 25 Mar 2015 12:05:14 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Pipeline challenge / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/pipeline/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Написать клиент, реализующий передачу сообщений в условиях канала передачи с помехами.
+        </summary>
+        <updated>
+            Wed, 21 Jan 2015 08:59:51 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            CRUD / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/crud/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться создавать стандартный набор маршрутов для полного управления сущностью
+        </summary>
+        <updated>
+            Mon, 16 Jul 2018 07:50:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Cookies / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/cookies/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать куки в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:55:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Деплой / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/deploy/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с ключевыми понятиями и процессом деплоя
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:40:10 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Сессия / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/session/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать сессию в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:39:53 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Стандарт PSR7 / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/psr7/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с интерфейсами HTTP сообщений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Именованные маршруты / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/named-routes/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать более устойчивую систему для управления маршрутизацией
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Model-View-Controller (MVC) / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/mvc/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с одним из ключевых архитектурных паттернов построения пользовательских приложений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:13 +0000
+        </updated>
+    </entry>
+</feed>",
+  ],
+}
+`;
+
+exports[`App file input should works 1`] = `
+Object {
+  "reads": Array [
+    Object {
+      "path": "./lessons.rss",
+    },
+  ],
+  "requests": Array [],
+  "result": Object {
+    "status": "ok",
+  },
+  "writes": Array [
+    "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<feed xmlns=\\"http://www.w3.org/2005/Atom\\">
+    <title>
+        Новые уроки на Хекслете
+    </title>
+    <subtitle>
+        Практические уроки по программированию
+    </subtitle>
+    <link href=\\"https://ru.hexlet.io/\\">
+    </link>
+    <author>
+        <email>
+            info@hexlet.io
+        </email>
+    </author>
+    <entry>
+        <title>
+            Ареалы проживания членистоногих. Конкурс по функциональному программированию 03.2015. / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/functional-contest-03-2015/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Получить сатисфакцию
+        </summary>
+        <updated>
+            Thu, 05 Mar 2015 14:56:47 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Rails для начинающих / Фреймворки
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/frameworks/lessons/rails_getting_started/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться работать с фреймворком Rails
+        </summary>
+        <updated>
+            Wed, 25 Mar 2015 12:05:14 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Pipeline challenge / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/pipeline/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Написать клиент, реализующий передачу сообщений в условиях канала передачи с помехами.
+        </summary>
+        <updated>
+            Wed, 21 Jan 2015 08:59:51 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            CRUD / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/crud/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться создавать стандартный набор маршрутов для полного управления сущностью
+        </summary>
+        <updated>
+            Mon, 16 Jul 2018 07:50:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Cookies / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/cookies/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать куки в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:55:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Деплой / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/deploy/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с ключевыми понятиями и процессом деплоя
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:40:10 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Сессия / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/session/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать сессию в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:39:53 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Стандарт PSR7 / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/psr7/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с интерфейсами HTTP сообщений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Именованные маршруты / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/named-routes/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать более устойчивую систему для управления маршрутизацией
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Model-View-Controller (MVC) / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/mvc/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с одним из ключевых архитектурных паттернов построения пользовательских приложений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:13 +0000
+        </updated>
+    </entry>
+</feed>",
+  ],
+}
+`;
+
+exports[`App limit option should works 1`] = `
+Object {
+  "reads": Array [
+    Object {
+      "path": "./lessons.rss",
+    },
+  ],
+  "requests": Array [],
+  "result": Object {
+    "status": "ok",
+  },
+  "writes": Array [
+    "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<feed xmlns=\\"http://www.w3.org/2005/Atom\\">
+    <title>
+        Новые уроки на Хекслете
+    </title>
+    <subtitle>
+        Практические уроки по программированию
+    </subtitle>
+    <link href=\\"https://ru.hexlet.io/\\">
+    </link>
+    <author>
+        <email>
+            info@hexlet.io
+        </email>
+    </author>
+    <entry>
+        <title>
+            CRUD / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/crud/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться создавать стандартный набор маршрутов для полного управления сущностью
+        </summary>
+        <updated>
+            Mon, 16 Jul 2018 07:50:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Cookies / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/cookies/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать куки в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:55:20 +0000
+        </updated>
+    </entry>
+</feed>",
+  ],
+}
+`;
+
+exports[`App reverse option should works 1`] = `
+Object {
+  "reads": Array [
+    Object {
+      "path": "./lessons.rss",
+    },
+  ],
+  "requests": Array [],
+  "result": Object {
+    "status": "ok",
+  },
+  "writes": Array [
+    "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<feed xmlns=\\"http://www.w3.org/2005/Atom\\">
+    <title>
+        Новые уроки на Хекслете
+    </title>
+    <subtitle>
+        Практические уроки по программированию
+    </subtitle>
+    <link href=\\"https://ru.hexlet.io/\\">
+    </link>
+    <author>
+        <email>
+            info@hexlet.io
+        </email>
+    </author>
+    <entry>
+        <title>
+            Model-View-Controller (MVC) / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/mvc/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с одним из ключевых архитектурных паттернов построения пользовательских приложений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:13 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Именованные маршруты / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/named-routes/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать более устойчивую систему для управления маршрутизацией
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Стандарт PSR7 / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/psr7/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с интерфейсами HTTP сообщений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Сессия / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/session/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать сессию в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:39:53 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Деплой / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/deploy/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с ключевыми понятиями и процессом деплоя
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:40:10 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Cookies / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/cookies/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать куки в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:55:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            CRUD / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/crud/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться создавать стандартный набор маршрутов для полного управления сущностью
+        </summary>
+        <updated>
+            Mon, 16 Jul 2018 07:50:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Pipeline challenge / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/pipeline/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Написать клиент, реализующий передачу сообщений в условиях канала передачи с помехами.
+        </summary>
+        <updated>
+            Wed, 21 Jan 2015 08:59:51 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Rails для начинающих / Фреймворки
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/frameworks/lessons/rails_getting_started/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться работать с фреймворком Rails
+        </summary>
+        <updated>
+            Wed, 25 Mar 2015 12:05:14 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Ареалы проживания членистоногих. Конкурс по функциональному программированию 03.2015. / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/functional-contest-03-2015/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Получить сатисфакцию
+        </summary>
+        <updated>
+            Thu, 05 Mar 2015 14:56:47 +0000
+        </updated>
+    </entry>
+</feed>",
+  ],
+}
+`;
+
+exports[`App rss out with network input should works 1`] = `
+Object {
+  "reads": Array [],
+  "requests": Array [
+    Object {
+      "url": "https://ru.hexlet.io/lessons.rss",
+    },
+  ],
+  "result": Object {
+    "status": "ok",
+  },
+  "writes": Array [
+    "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<rss version=\\"2.0\\" xmlns:atom=\\"http://www.w3.org/2005/Atom\\">
+    <channel>
+        <title>
+            Новые уроки на Хекслете
+        </title>
+        <description>
+            Практические уроки по программированию
+        </description>
+        <link>
+            https://ru.hexlet.io/
+        </link>
+        <webMaster>
+            info@hexlet.io
+        </webMaster>
+        <item>
+            <title>
+                Ареалы проживания членистоногих. Конкурс по функциональному программированию 03.2015. / Главные испытания
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/main/lessons/functional-contest-03-2015/theory_unit
+            </link>
+            <description>
+                Цель: Получить сатисфакцию
+            </description>
+            <pubDate>
+                Thu, 05 Mar 2015 14:56:47 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Rails для начинающих / Фреймворки
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/frameworks/lessons/rails_getting_started/theory_unit
+            </link>
+            <description>
+                Цель: Научиться работать с фреймворком Rails
+            </description>
+            <pubDate>
+                Wed, 25 Mar 2015 12:05:14 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Pipeline challenge / Главные испытания
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/main/lessons/pipeline/theory_unit
+            </link>
+            <description>
+                Цель: Написать клиент, реализующий передачу сообщений в условиях канала передачи с помехами.
+            </description>
+            <pubDate>
+                Wed, 21 Jan 2015 08:59:51 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                CRUD / Веб-разработка на PHP
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/php-mvc/lessons/crud/theory_unit
+            </link>
+            <description>
+                Цель: Научиться создавать стандартный набор маршрутов для полного управления сущностью
+            </description>
+            <pubDate>
+                Mon, 16 Jul 2018 07:50:43 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Cookies / Веб-разработка на PHP
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/php-mvc/lessons/cookies/theory_unit
+            </link>
+            <description>
+                Цель: Научиться использовать куки в PHP
+            </description>
+            <pubDate>
+                Sun, 15 Jul 2018 18:55:20 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Деплой / Веб-разработка на PHP
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/php-mvc/lessons/deploy/theory_unit
+            </link>
+            <description>
+                Цель: Познакомиться с ключевыми понятиями и процессом деплоя
+            </description>
+            <pubDate>
+                Sun, 15 Jul 2018 18:40:10 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Сессия / Веб-разработка на PHP
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/php-mvc/lessons/session/theory_unit
+            </link>
+            <description>
+                Цель: Научиться использовать сессию в PHP
+            </description>
+            <pubDate>
+                Sun, 15 Jul 2018 18:39:53 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Стандарт PSR7 / Веб-разработка на PHP
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/php-mvc/lessons/psr7/theory_unit
+            </link>
+            <description>
+                Цель: Познакомиться с интерфейсами HTTP сообщений
+            </description>
+            <pubDate>
+                Sun, 15 Jul 2018 18:30:43 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Именованные маршруты / Веб-разработка на PHP
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/php-mvc/lessons/named-routes/theory_unit
+            </link>
+            <description>
+                Цель: Научиться использовать более устойчивую систему для управления маршрутизацией
+            </description>
+            <pubDate>
+                Sun, 15 Jul 2018 18:30:20 +0000
+            </pubDate>
+        </item>
+        <item>
+            <title>
+                Model-View-Controller (MVC) / Веб-разработка на PHP
+            </title>
+            <link>
+                https://ru.hexlet.io/courses/php-mvc/lessons/mvc/theory_unit
+            </link>
+            <description>
+                Цель: Познакомиться с одним из ключевых архитектурных паттернов построения пользовательских приложений
+            </description>
+            <pubDate>
+                Sun, 15 Jul 2018 18:30:13 +0000
+            </pubDate>
+        </item>
+    </channel>
+</rss>",
+  ],
+}
+`;
+
+exports[`App sort, reverse and limit options should apply in right order 1`] = `
+Object {
+  "reads": Array [
+    Object {
+      "path": "./lessons.rss",
+    },
+  ],
+  "requests": Array [],
+  "result": Object {
+    "status": "ok",
+  },
+  "writes": Array [
+    "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<feed xmlns=\\"http://www.w3.org/2005/Atom\\">
+    <title>
+        Новые уроки на Хекслете
+    </title>
+    <subtitle>
+        Практические уроки по программированию
+    </subtitle>
+    <link href=\\"https://ru.hexlet.io/\\">
+    </link>
+    <author>
+        <email>
+            info@hexlet.io
+        </email>
+    </author>
+    <entry>
+        <title>
+            CRUD / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/crud/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться создавать стандартный набор маршрутов для полного управления сущностью
+        </summary>
+        <updated>
+            Mon, 16 Jul 2018 07:50:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Cookies / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/cookies/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать куки в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:55:20 +0000
+        </updated>
+    </entry>
+</feed>",
+  ],
+}
+`;
+
+exports[`App sort=date option should works 1`] = `
+Object {
+  "reads": Array [
+    Object {
+      "path": "./lessons.rss",
+    },
+  ],
+  "requests": Array [],
+  "result": Object {
+    "status": "ok",
+  },
+  "writes": Array [
+    "<?xml version=\\"1.0\\" encoding=\\"utf-8\\"?>
+<feed xmlns=\\"http://www.w3.org/2005/Atom\\">
+    <title>
+        Новые уроки на Хекслете
+    </title>
+    <subtitle>
+        Практические уроки по программированию
+    </subtitle>
+    <link href=\\"https://ru.hexlet.io/\\">
+    </link>
+    <author>
+        <email>
+            info@hexlet.io
+        </email>
+    </author>
+    <entry>
+        <title>
+            CRUD / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/crud/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться создавать стандартный набор маршрутов для полного управления сущностью
+        </summary>
+        <updated>
+            Mon, 16 Jul 2018 07:50:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Cookies / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/cookies/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать куки в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:55:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Деплой / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/deploy/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с ключевыми понятиями и процессом деплоя
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:40:10 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Сессия / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/session/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать сессию в PHP
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:39:53 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Стандарт PSR7 / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/psr7/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с интерфейсами HTTP сообщений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:43 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Именованные маршруты / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/named-routes/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться использовать более устойчивую систему для управления маршрутизацией
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:20 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Model-View-Controller (MVC) / Веб-разработка на PHP
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/php-mvc/lessons/mvc/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Познакомиться с одним из ключевых архитектурных паттернов построения пользовательских приложений
+        </summary>
+        <updated>
+            Sun, 15 Jul 2018 18:30:13 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Rails для начинающих / Фреймворки
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/frameworks/lessons/rails_getting_started/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Научиться работать с фреймворком Rails
+        </summary>
+        <updated>
+            Wed, 25 Mar 2015 12:05:14 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Ареалы проживания членистоногих. Конкурс по функциональному программированию 03.2015. / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/functional-contest-03-2015/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Получить сатисфакцию
+        </summary>
+        <updated>
+            Thu, 05 Mar 2015 14:56:47 +0000
+        </updated>
+    </entry>
+    <entry>
+        <title>
+            Pipeline challenge / Главные испытания
+        </title>
+        <link href=\\"https://ru.hexlet.io/courses/main/lessons/pipeline/theory_unit\\">
+        </link>
+        <summary>
+            Цель: Написать клиент, реализующий передачу сообщений в условиях канала передачи с помехами.
+        </summary>
+        <updated>
+            Wed, 21 Jan 2015 08:59:51 +0000
+        </updated>
+    </entry>
+</feed>",
+  ],
+}
+`;

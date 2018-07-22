@@ -26,7 +26,7 @@ export class ArgsParser<OptionsType> {
         const shortcutCommand = shortcut ? `-${shortcut}, ` : ''
         const valueOptions = {
           string: { placeholder: ' <n>', parser: undefined },
-          number: { placeholder: ' <n>', parser: parseInt },
+          number: { placeholder: ' <n>', parser: Number },
           boolean: { placeholder: '', parser: undefined, defaultValue: false },
         }[type]
         return p.option(

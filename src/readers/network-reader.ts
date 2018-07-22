@@ -15,6 +15,6 @@ export class NetworkReader implements ResourceReader {
     return this.network
       .get(url)
       .then(res => res.data)
-      .catch(() => 'CANNOT_DOWNLOAD')
+      .catch(() => Promise.reject('CANNOT_DOWNLOAD'))
   }
 }
